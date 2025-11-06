@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Califications</title>
+</head>
+<body>
+    {% for calification in califications.all %}
+        <li><b>User</b></li>
+        <li>{{ calification.name }}</li>
+        <li><b>Comment</b></li>
+        <li>{{ calification.comment }}</li>
+        <li><b>Rating</b></li>
+        <li>{{ calification.rating }}</li>
+        <li><b>Calification Date</b></li>
+        <li>{{ calification.calification_date }}</li>
+    {% endfor %}
+</body>
+</html>

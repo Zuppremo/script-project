@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main dashboard</title>
+</head>
+<body>
+    <a href="{% url 'calification_app:index' %}"><button>Go to calificate</button></a>
+    <a href="{% url 'calification_app:all_califications' %}"><button>Show Califications</button></a>
+
+    {% if category_groups_list %}
+    <ul>
+    {% for category in category_groups_list %}
+        <li><a href="{% url 'script:detail' category.id %}">{{ category.name }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>No categories are available.</p>
+{% endif %}
+</body>
+</html>
