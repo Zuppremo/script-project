@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Categorías</h2>
+<a href="{% url 'script:category_create' %}">
+    <button class="btn btn-success">Crear Nueva Categoría</button>
+</a>
+    <ul>
+        {% for cat in object_list %}
+            <li>
+                {{ cat.name }}
+
+                <a href="{% url 'script:script_by_category' cat.pk %}">
+                    <button class="btn btn-info btn-sm">Ver Scripts</button>
+                </a>
+
+                <a href="{% url 'script:category_edit' cat.pk %}">
+                    <button class="btn btn-warning btn-sm">Editar</button>
+                </a>
+
+                <a href="{% url 'script:category_delete' cat.pk %}">
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -10,6 +10,7 @@
     {% for script in category_group.script_set.all %}
         <li>{{ script.name }}</li>
         <li>{{ script.content }}</li>
+        <li><button class="btn btn-outline-primary copy-btn" data-hex="{{script.content}}">Copy</button></li>
     {% endfor %}
 </ul>
 </body>

@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scripts in {{ category.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2>Scripts en la categoría: {{ category.name }}</h2>
+
+    {% if script_list %}
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Copy</th>
+                <th>Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for script in script_list %}
+            <tr>
+                <td>{{ script.name }}</td>
+                <td><button class="btn btn-outline-primary copy-btn" data-hex="{{ script.content }}">Copy</button></td>
+                <td><a class="btn btn-info" href="{% url 'script:script_detail' script.id %}">Ver detalle</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+        <p>No hay scripts en esta categoría.</p>
+    {% endif %}
+
+    <a href="{% url 'script:index' %}" class="btn btn-secondary mt-3">Volver</a>
+</div>
+
+<script src="{% static 'main.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>¿Eliminar script?</h2>
+
+<p>{{ script.name }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+</form>
+
+<a href="{% url 'script_detail' script.pk %}">Cancelar</a>
+
+</body>
+</html>

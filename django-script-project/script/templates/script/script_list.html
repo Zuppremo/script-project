@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <h2>Scripts</h2>
+
+<a href="{% url 'script:script_create' %}">
+    <button class="btn btn-success">Crear Nuevo Script</button>
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre del Script</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for script in script_list %}
+        <tr>
+            <td>{{ script.name }}</td>
+            <td>
+                <a href="{% url 'script:script_detail' script.pk %}">
+                    <button class="btn btn-info btn-sm">Ver</button>
+                </a>
+
+                <a href="{% url 'script:script_edit' script.pk %}">
+                    <button class="btn btn-warning btn-sm">Editar</button>
+                </a>
+
+                <a href="{% url 'script:script_delete' script.pk %}">
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

@@ -5,17 +5,25 @@
     <title>Main dashboard</title>
 </head>
 <body>
-    <a href="{% url 'calification_app:index' %}"><button>Go to calificate</button></a>
-    <a href="{% url 'calification_app:all_califications' %}"><button>Show Califications</button></a>
+    <h1>Dashboard</h1>
+    <a href="{% url 'script:category_list' %}">
+        <button class="btn btn-primary">Ver Categorías</button>
+    </a>
 
-    {% if category_groups_list %}
-    <ul>
-    {% for category in category_groups_list %}
-        <li><a href="{% url 'script:detail' category.id %}">{{ category.name }}</a></li>
-    {% endfor %}
-    </ul>
-    {% else %}
-        <p>No categories are available.</p>
-{% endif %}
+    <a href="{% url 'script:category_create' %}">
+        <button class="btn btn-success">Crear Categoría</button>
+    </a>
+
+    <br><br>
+
+    <a href="{% url 'script:script_list' %}">
+        <button class="btn btn-primary">Ver Scripts</button>
+    </a>
+
+
+    <a href="{% url 'script:script_create' %}">
+        <button class="btn btn-success">Crear Script</button>
+    </a>
 </body>
+
 </html>

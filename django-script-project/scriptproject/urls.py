@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.shortcuts import redirect
+from django.conf import settings
+from django.conf.urls.static import static
+from script.views import *
 
 urlpatterns = \
 [
+    path('', lambda request: redirect('script:index')),
     path('script/', include('script.urls')),
     path('calification_app/', include('calification_app.urls')),
     path('admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
