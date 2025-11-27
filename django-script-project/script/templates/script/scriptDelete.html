@@ -13,8 +13,7 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Eliminar</button>
 </form>
-
-<a href="{% url 'script_detail' script.pk %}">Cancelar</a>
+    <a href="{% url 'script:script_list' %}" class="btn btn-secondary">Cancelar</a>
 
 </body>
 </html>

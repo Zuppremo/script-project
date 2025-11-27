@@ -11,10 +11,11 @@ urlpatterns = [
     path('scripts/create/', views.ScriptCreateView.as_view(), name='script_create'),
     path('scripts/<int:pk>/edit/', views.ScriptUpdateView.as_view(), name='script_edit'),
     path('scripts/<int:pk>/delete/', views.ScriptDeleteView.as_view(), name='script_delete'),
+    path("scripts/<int:category_id>/", ScriptListView.as_view(), name="script_list"),
+    path('scripts/category/<int:pk>/', ScriptByCategoryListView.as_view(), name='script_by_category'),
 
     path('categories/', views.CategoryGroupListView.as_view(), name='category_list'),
     path('categories/create/', views.CategoryGroupCreateView.as_view(), name='category_create'),
     path('categories/<int:pk>/edit/', views.CategoryGroupUpdateView.as_view(), name='category_edit'),
     path('categories/<int:pk>/delete/', views.CategoryGroupDeleteView.as_view(), name='category_delete'),
-    path('scripts/category/<int:pk>/', ScriptByCategoryListView.as_view(), name='script_by_category'),
 ]

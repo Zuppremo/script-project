@@ -38,11 +38,11 @@ def script_create(request):
         form = ScriptForm(request.POST)
         if form.is_valid():
             script = form.save()
-            return redirect('script_detail', pk=script.pk)
+            return redirect('script/scriptDetail.html', pk=script.pk)
     else:
         form = ScriptForm()
 
-    return render(request, 'script_create.html', {'form': form})
+    return render(request, 'script/script_create.html', {'form': form})
 
 class ScriptUpdateView(UpdateView):
     model = Script
@@ -57,7 +57,7 @@ def script_edit(request, pk):
         form = ScriptForm(request.POST, instance=script)
         if form.is_valid():
             form.save()
-            return redirect('script_detail', pk=pk)
+            return redirect('script/scriptDetail.html', pk=pk)
     else:
         form = ScriptForm(instance=script)
 
@@ -76,7 +76,7 @@ def script_delete(request, pk):
         script.delete()
         return redirect('script_list')
 
-    return render(request, 'script_delete.html', {'script': script})
+    return render(request, 'script/scriptDelete.html', {'script': script})
 
 class CategoryGroupListView(ListView):
     model = CategoryGroup
@@ -93,11 +93,11 @@ def category_create(request):
         form = CategoryGroupForm(request.POST)
         if form.is_valid():
             category = form.save()
-            return redirect('category_detail', pk=category.pk)
+            return redirect('script/category_detail', pk=category.pk)
     else:
         form = CategoryGroupForm()
 
-    return render(request, 'category_create.html', {'form': form})
+    return render(request, 'script/category_create.html', {'form': form})
 
 class CategoryGroupUpdateView(UpdateView):
     model = CategoryGroup
@@ -112,11 +112,11 @@ def category_edit(request, pk):
         form = CategoryGroupForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
-            return redirect('category_detail', pk=pk)
+            return redirect('script/category_detail', pk=pk)
     else:
         form = CategoryGroupForm(instance=category)
 
-    return render(request, 'category_edit.html', {'form': form})
+    return render(request, 'script/category_edit.html', {'form': form})
 
 class CategoryGroupDeleteView(DeleteView):
     model = CategoryGroup
