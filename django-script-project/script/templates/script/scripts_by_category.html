@@ -1,44 +1,74 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Scripts in {{ category.name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripts en {{ category.name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
+    <div class="container py-4">
+        <!-- Botones de Navegación -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <a href="{% url 'script:category_list' %}" class="btn btn-outline-secondary me-2">
+                    <i class="fas fa-arrow-left"></i> Volver a Categorías
+                </a>
+                <a href="{% url 'script:index' %}" class="btn btn-outline-primary">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+            </div>
+            <h2 class="mb-0">Scripts en: {{ category.name }}</h2>
+        </div>
 
-<div class="container mt-4">
-    <h2>Scripts en la categoría: {{ category.name }}</h2>
+        {% if script_list %}
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nombre</th>
+                                <th width="100">Copiar</th>
+                                <th width="120">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for script in script_list %}
+                            <tr>
+                                <td class="align-middle">{{ script.name }}</td>
+                                <td>
+                                    <button class="btn btn-outline-primary btn-sm copy-btn"
+                                            data-content="{{ script.content }}">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <a href="{% url 'script:script_detail' script.id %}"
+                                       class="btn btn-info btn-sm">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center">
+            <h5><i class="fas fa-info-circle"></i> No hay scripts en esta categoría</h5>
+            <p class="mb-0">Puedes crear un nuevo script desde el menú principal</p>
+            <a href="{% url 'script:script_create' %}" class="btn btn-success mt-2">
+                <i class="fas fa-plus"></i> Crear Script
+            </a>
+        </div>
+        {% endif %}
+    </div>
 
-    {% if script_list %}
-    <table class="table mt-3">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Copy</th>
-                <th>Ver</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for script in script_list %}
-            <tr>
-                <td>{{ script.name }}</td>
-                <td><button class="btn btn-outline-primary copy-btn" data-hex="{{ script.content }}">Copy</button></td>
-                <td><a class="btn btn-info" href="{% url 'script:script_detail' script.id %}">Ver detalle</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    {% else %}
-        <p>No hay scripts en esta categoría.</p>
-    {% endif %}
-
-    <a href="{% url 'script:index' %}" class="btn btn-secondary mt-3">Volver</a>
-</div>
-
-<script src="{% static 'main.js' %}" defer></script>
+    <script src="{% static 'main.js' %}" defer></script>
 </body>
 </html>

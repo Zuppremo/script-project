@@ -1,17 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category_group.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>{{ category_group.name }}</h1>
-<ul>
-    {% for script in category_group.script_set.all %}
-        <li>{{ script.name }}</li>
-        <li>{{ script.content }}</li>
-        <li><button class="btn btn-outline-primary copy-btn" data-hex="{{script.content}}">Copy</button></li>
-    {% endfor %}
-</ul>
+<body class="bg-light">
+    <div class="container py-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h1 class="mb-0">{{ category_group.name }}</h1>
+            </div>
+            <div class="card-body">
+                {% if category_group.script_set.all %}
+                <div class="list-group">
+                    {% for script in category_group.script_set.all %}
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1">{{ script.name }}</h5>
+                                <p class="mb-1 text-muted">{{ script.content|truncatewords:20 }}</p>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm copy-btn"
+                                    data-content="{{ script.content }}">
+                                Copiar
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info text-center">
+                    <h5>No hay scripts en esta categoría</h5>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>

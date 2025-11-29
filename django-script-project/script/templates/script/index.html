@@ -1,29 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Main dashboard</title>
-</head>
-<body>
-    <h1>Dashboard</h1>
-    <a href="{% url 'script:category_list' %}">
-        <button class="btn btn-primary">Ver Categorías</button>
-    </a>
+{% extends 'base.html' %}
 
-    <a href="{% url 'script:category_create' %}">
-        <button class="btn btn-success">Crear Categoría</button>
-    </a>
+{% block title %}Dashboard Principal{% endblock %}
 
-    <br><br>
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4">Dashboard de Scripts</h1>
+    <p class="lead">Gestiona tus categorías y scripts de forma eficiente</p>
+</div>
 
-    <a href="{% url 'script:script_list' %}">
-        <button class="btn btn-primary">Ver Scripts</button>
-    </a>
+<div class="row g-4">
+    <!-- Categorías -->
+    <div class="col-md-6">
+        <div class="card dashboard-card h-100 shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0"><i class="fas fa-folder"></i> Categorías</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Gestiona las categorías para organizar tus scripts.</p>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'script:category_list' %}" class="btn btn-primary">
+                        <i class="fas fa-list"></i> Ver Categorías
+                    </a>
+                    <a href="{% url 'script:category_create' %}" class="btn btn-success">
+                        <i class="fas fa-plus"></i> Crear Categoría
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-    <a href="{% url 'script:script_create' %}">
-        <button class="btn btn-success">Crear Script</button>
-    </a>
-</body>
-
-</html>
+    <!-- Scripts -->
+    <div class="col-md-6">
+        <div class="card dashboard-card h-100 shadow">
+            <div class="card-header bg-info text-white">
+                <h3 class="mb-0"><i class="fas fa-scroll"></i> Scripts</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Administra todos tus scripts en un solo lugar.</p>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'script:script_list' %}" class="btn btn-info text-white">
+                        <i class="fas fa-list"></i> Ver Scripts
+                    </a>
+                    <a href="{% url 'script:script_create' %}" class="btn btn-success">
+                        <i class="fas fa-plus"></i> Crear Script
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
