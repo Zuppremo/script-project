@@ -7,7 +7,12 @@
 <body>
     {% block content %}
     <div class="container mt-4">
-        <h2>Crear Categoría</h2>
+
+        {% if object %}
+        <h2>Editar Categoría</h2>
+        {% else %}
+            <h2>Crear Categoría</h2>
+        {% endif %}
 
         <form method="post">
             {% csrf_token %}

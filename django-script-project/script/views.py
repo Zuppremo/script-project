@@ -33,6 +33,12 @@ class ScriptCreateView(CreateView):
     template_name = 'script/scriptCreate.html'
     success_url = reverse_lazy('script:index')
 
+class ScriptUpdateView(UpdateView):
+    model = Script
+    form_class = ScriptForm
+    template_name = 'script/scriptCreate.html'
+    success_url = reverse_lazy('script:index')
+
 def script_create(request):
     if request.method == 'POST':
         form = ScriptForm(request.POST)
@@ -43,12 +49,6 @@ def script_create(request):
         form = ScriptForm()
 
     return render(request, 'script/script_create.html', {'form': form})
-
-class ScriptUpdateView(UpdateView):
-    model = Script
-    form_class = ScriptForm
-    template_name = 'script/scriptCreate.html'
-    success_url = reverse_lazy('script:index')
 
 def script_edit(request, pk):
     script = get_object_or_404(Script, pk=pk)
