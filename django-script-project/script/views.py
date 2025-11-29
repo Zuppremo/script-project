@@ -21,7 +21,7 @@ def details(request, category_id):
 
 class ScriptListView(ListView):
     model = Script
-    template_name = 'templates/script/scriptList.html'
+    template_name = 'templates/script/script_list.html'
 
 class ScriptDetailView(DetailView):
     model = Script
@@ -57,17 +57,16 @@ def script_edit(request, pk):
         form = ScriptForm(request.POST, instance=script)
         if form.is_valid():
             form.save()
-            return redirect('script/scriptDetail.html', pk=pk)
+            return redirect('script:script_detail', pk=pk)
     else:
         form = ScriptForm(instance=script)
 
-    return render(request, 'script_edit.html', {'form': form})
+    return render(request, 'script:script_edit', {'form': form})
 
 class ScriptDeleteView(DeleteView):
     model = Script
-    form_class = ScriptForm
     template_name = 'script/scriptDelete.html'
-    success_url = reverse_lazy('script/scriptList.html')
+    success_url = reverse_lazy('script:script_list')
 
 def script_delete(request, pk):
     script = get_object_or_404(Script, pk=pk)

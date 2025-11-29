@@ -1,21 +1,25 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Main dashboard</title>
+
+    <script>
+        function copyContent() {
+            const text = document.getElementById("script-content").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+            });
+        }
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    {% block content %}
-
 <h2>{{ object.name }}</h2>
 
-<p><strong>Categoría:</strong> {{ object.CategoryGroup.name }}</p>
+<p><strong>Categoría:</strong> {{ object.category_group.name }}</p>
 
-<p><strong>Contenido:</strong></p>
-<pre>{{ object.content }}</pre>
+<p><strong >Contenido:</strong></p>
+<pre id="script-content">{{ object.content }}</pre>
 
 <br>
 
@@ -23,8 +27,9 @@
 
 <a href="{% url 'script:script_delete' object.pk %}" class="btn btn-danger">Eliminar</a>
 
+<button onclick="copyContent()" class="btn btn-primary">Copiar contenido</button>
+
 <a href="{% url 'script:script_by_category' object.CategoryGroup.pk  %}">Volver</a>
 
-{% endblock %}
 </body>
 </html>
