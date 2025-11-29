@@ -1,1 +1,1 @@
-web: cd django-script-project && python manage.py migrate && gunicorn scriptproject.wsgi:application --bind 0.0.0.0:$PORT
+web: python django-script-project/manage.py migrate && gunicorn django-script-project.your_project_name.wsgi:application --bind 0.0.0.0:$PORT
